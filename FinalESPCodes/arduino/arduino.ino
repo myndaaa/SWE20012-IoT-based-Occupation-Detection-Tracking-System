@@ -5,11 +5,11 @@
 #include <PubSubClient.h>
 
 // WiFi credentials
-const char* ssid = "airbus";
-const char* password = "hihelloobye";
+const char* ssid = "Lab@IOT";
+const char* password = "P@ss1234";
 
 // MQTT server details
-const char* mqtt_server = "192.168.0.101";
+const char* mqtt_server = "172.17.160.136";
 const int mqtt_port = 1883;
 
 #define NUM_LEDS 144
@@ -31,13 +31,14 @@ bool blinkMode = false;
 bool l_occupied = false;
 bool l_rfidscanned = false;
 CRGB neoColor = CRGB::Black;  // Default color from Neocolor topic
+int counter = 100;
 
 // Function to convert hex color to RGB
 CRGB hexToRgb(const String &hex) {
   long number = strtol(hex.substring(1).c_str(), NULL, 16);
-  int r = (number >> 16) & 0xFF;
-  int g = (number >> 8) & 0xFF;
-  int b = number & 0xFF;
+  int r = (number >> 16);
+  int b = (number >> 8);
+  int g = number;
   return CRGB(r, g, b);
 }
 
@@ -78,7 +79,8 @@ void callback(char* topic, byte* payload, unsigned int length) {
     }
   } else if (String(topic) == "booking") {
     if (message == "Yes") {
-      setStripColor(CRGB::Yellow);
+      FastLED.setBrightness(255);
+      setStripColor(CRGB::Purple);
     }
   } else if (String(topic) == "Neocolor" && message.charAt(0) == '#' && message.length() == 7) {
     neoColor = hexToRgb(message);
@@ -94,6 +96,9 @@ void callback(char* topic, byte* payload, unsigned int length) {
     if (message == "No") {
       noTone(BUZZER_PIN);
     }
+  } else if (String(topic)== "brightness"){
+    FastLED.setBrightness(message.toInt());
+    setStripColor(neoColor);
   }
 }
 
@@ -116,15 +121,18 @@ void setup() {
 
   // Wait for WiFi connection
   while (WiFi.status() != WL_CONNECTED) {
+    Serial.println("No wifi");
     delay(500);
   }
 
   client.setServer(mqtt_server, mqtt_port);
   client.setCallback(callback);
 
+  Serial.println("Test");
   FastLED.addLeds<NEOPIXEL, LED_PIN>(leds, NUM_LEDS).setRgbw(RgbwDefault());
   FastLED.setBrightness(128);
   delay(2000);
+  setStripColor(neoColor);
 }
 
 void loop() {
@@ -136,8 +144,10 @@ void loop() {
         client.subscribe("Neocolor");
         client.subscribe("Blynk");
         client.subscribe("buzzer");
+        client.subscribe("brightness");
       } else {
         delay(5000);
+        Serial.println("No MQTT");
       }
     }
   }
@@ -154,19 +164,25 @@ void loop() {
       uidString += String(mfrc522.uid.uidByte[i], HEX);
     }
 
-    setStripColor(CRGB::Green);
-    publishToTopic("rfidScanned", "Yes");
+    setStripColor(CRGB::Blue);
+    publishToTopic("rfidScanned", uidString.c_str());
     l_rfidscanned = true;
 
     mfrc522.PICC_HaltA();
   }
 
   if (!l_rfidscanned && l_occupied) {
+    counter--;
+  }else{
+    counter = 100;
+  }
+
+  if(counter < 0){
     tone(BUZZER_PIN, 1000);
-    publishToTopic("buzzer", "Yes");
   }
 
   if (l_rfidscanned) {
     noTone(BUZZER_PIN);
+    counter = 100;
   }
 }

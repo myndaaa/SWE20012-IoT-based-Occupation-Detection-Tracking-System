@@ -4,8 +4,8 @@
 #include <MFRC522.h>
 #include <PubSubClient.h>
 
-const char *ssid = "Hi";
-const char *password = "Hello123";
+const char *ssid = "Lab@IOT";
+const char *password = "P@ss1234";
 #define NUM_LEDS 144
 #define BUZZER_PIN 4 
 #define LED_PIN   22
@@ -17,7 +17,7 @@ const char *password = "Hello123";
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);
 
-const char* mqtt_server = "broker.hivemq.com";  // You can use any public broker or your own
+const char* mqtt_server = "172.17.160.136";  // You can use any public broker or your own
 const int mqtt_port = 1883;
 
 WiFiClient espClient;

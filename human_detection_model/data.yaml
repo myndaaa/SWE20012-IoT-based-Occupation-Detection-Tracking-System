@@ -1,0 +1,9 @@
+# data.yaml
+train: C:/Users/bheja/OneDrive/Desktop/Person/train/images  # Path to training images
+val: C:/Users/bheja/OneDrive/Desktop/Person/test/images     # Path to validation images
+
+# Number of classes
+nc: 1  # Number of classes (1 for person detection)
+
+# Class names
+names: ['person']

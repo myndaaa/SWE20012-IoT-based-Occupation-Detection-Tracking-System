@@ -1,0 +1,51 @@
+// lib/models/single_table_booking.dart
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'table_booking.g.dart';
+
+
+@JsonSerializable(explicitToJson: true)
+class SingleTableBooking {
+  final String? Email;
+
+  @TimestampConverter()
+  final Timestamp? Created;
+
+  @TimestampConverter()
+  final Timestamp? TimeStart;
+
+  @TimestampConverter()
+  final Timestamp? TimeEnd;
+
+  final String? status;
+
+  SingleTableBooking({
+    this.Email,
+    this.Created,
+    this.TimeStart,
+    this.TimeEnd,
+    this.status,
+  });
+
+  factory SingleTableBooking.fromJson(Map<String, dynamic> json) =>
+      _$SingleTableBookingFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SingleTableBookingToJson(this);
+}
+
+
+
+class TimestampConverter implements JsonConverter<Timestamp?, dynamic> {
+  const TimestampConverter();
+
+  @override
+  Timestamp? fromJson(dynamic json) {
+    if (json == null) return null;
+    return json is Timestamp ? json : Timestamp.fromDate(DateTime.parse(json));
+  }
+
+  @override
+  dynamic toJson(Timestamp? object) => object?.toDate().toIso8601String();
+}

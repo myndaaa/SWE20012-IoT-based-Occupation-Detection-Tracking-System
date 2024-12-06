@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "830354761125",
+    "project_id": "swinburne-kch-iot",
+    "storage_bucket": "swinburne-kch-iot.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830354761125:android:a06f7f4869c06c5a81f44c",
+        "android_client_info": {
+          "package_name": "com.example.neko_neko_nya"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRYMybF1IaiT56bLKjVpM5XJiEXbA-ZBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

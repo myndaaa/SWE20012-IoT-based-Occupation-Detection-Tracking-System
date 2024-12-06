@@ -1,0 +1,39 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "swinburne-kch-iot",
+          "appId": "1:830354761125:android:a06f7f4869c06c5a81f44c",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "swinburne-kch-iot",
+          "configurations": {
+            "android": "1:830354761125:android:a06f7f4869c06c5a81f44c",
+            "ios": "1:830354761125:ios:0d1c03c26cf74ffb81f44c",
+            "macos": "1:830354761125:ios:0d1c03c26cf74ffb81f44c",
+            "web": "1:830354761125:web:2a284e93fcff394981f44c",
+            "windows": "1:830354761125:web:39b387d9b3b378cb81f44c"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

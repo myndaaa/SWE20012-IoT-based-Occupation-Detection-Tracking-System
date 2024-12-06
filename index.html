@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Overview - Table Occupancy Detector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #876191, #654E7F, #876191);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #FFD700;
+            font-size: 2.5em;
+        }
+        h3 {
+            text-align: center;
+            color: #FFDF00;
+            font-style: italic;
+            font-size: 1.8em;
+        }
+        h4 {
+            color: #FFD700;
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .section {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .section img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+            margin: 0 auto;
+        }
+        p {
+            font-size: 1em;
+            line-height: 1.6;
+            text-align: justify;
+			
+        }
+        .button {
+            display: block;
+            width: max-content;
+            margin: 30px auto;
+            padding: 15px 25px;
+            text-align: center;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+            background-color: #46245E;
+            border-radius: 25px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #654E7F;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Game Guard</h1>
+        <h3>An IoT-Based Occupation Detection System Utilizing Computer Vision and RFID Technology to Prevent Unauthorized Table Utilization</h3>
+
+        <div class="section">
+            <h4>Problem Statement</h4>
+            <p>“Neko Neko Nya,” a popular hobby shop in Kuching, Sarawak, serves as a vibrant community space for tabletop gaming
+            and pop culture enthusiasts. Despite its success, the shop faces significant challenges during its scheduled board game events, 
+            which are held at two large gaming tables. Unauthorized walk-ins frequently disrupt these events, leading to chaos and dissatisfaction 
+            among players and management. This issue not only undermines the event's smooth operation but also affects the shop’s reputation within
+            the local gaming community. There is a critical need for a reliable system that ensures only registered participants can access the 
+            gaming tables while detecting and deterring unauthorized users. Such a system must provide real-time monitoring, secure access control, 
+            and seamless table management to maintain the trust and satisfaction of the shop’s patrons.</p>
+        </div>
+
+        <div class="section">
+            <h4>Our Solution</h4>
+            <p>
+            To address the challenges faced by “Neko Neko Nya” during its board game events, a 
+            smart integrated system leveraging IoT, RFID, and computer vision is proposed. This solution will 
+            streamline table management, ensure authorized access, and enhance the overall gaming experience for 
+            customers and management alike. A digital booking system will be developed, allowing users to register, 
+            view available slots, and book tables in advance through a user-friendly web app. Booking records will be stored in a 
+            Firebase database for real-time validation. To ensure secure table access, RFID technology will be implemented, enabling players 
+            to scan their RFID cards at the tables to authenticate their bookings. This process will allow only authorized users to start a game.
+            Overhead cameras equipped with ultrasonic sensors or computer vision running on ESP32 will monitor the occupancy of each table, ensuring the 
+            presence of only authorized individuals. RGB LEDs installed along the table edges will visually indicate occupancy status, such as green for
+             available and red for occupied. For room-wide monitoring, existing CCTV cameras will be integrated to track total occupancy, with the Raspberry
+             Pi processing the video feeds to ensure alignment with the booking data. The system will also include a mechanism to detect unauthorized access
+             at tables using the overhead cameras.
+            If unregistered individuals are detected, real-time alerts will be sent to staff through the web app, allowing them to take prompt action.
+            The Raspberry Pi will act as the central processing unit, managing data from the cameras, RFID system, and Firebase database. The Arduino Uno
+            will handle RFID scanning and ultrasonic sensor inputs, communicating with the Raspberry Pi via MQTT for validation. Firebase will serve as the 
+            backend to store user bookings, RFID access logs, and occupancy data, while the web app will provide users and staff with live updates on table
+             availability and alerts for unauthorized access. This system offers a secure, efficient, and user-friendly solution to manage events, ensuring
+             a smooth experience for all stakeholders while maintaining community trust.
+            </p>
+        </div>
+
+        <div class="section">
+            <h4>System Prototype</h4>
+            <img src="pic1.png" alt="System Prototype" width="600">
+            <p>The prototype includes sensors, cameras, and RFID technology connected to a Raspberry Pi and ESP32 modules for data processing and monitoring.</p>
+        </div>
+
+        <div class="section">
+            <h4>System Architecture</h4>
+            <img src="pic2.png" alt="System Architecture" width="600">
+            <p>The system architecture involves various nodes, including a Raspberry Pi for local processing, a camera for video monitoring, and Firebase Firestore for centralized data handling.</p>
+        </div>
+
+        <div class="section">
+            <h4>System Schematic</h4>
+            <img src="schematic.jpeg" alt="System Schematic" width="300" height="300">
+            <p>The schematic shows the interconnected components, including sensors, actuators, and controllers that form the core of our smart table occupancy detection system.</p>
+        </div>
+
+        <div class="section">
+            <h4>Conclusion</h4>
+            <p>Through the use of advanced technologies such as RFID, computer vision, and IoT, our Table Occupancy Detector system offers a reliable way for board game venues to maintain organized operations. The integration with the mobile app makes it convenient for both users and admins.</p>
+        </div>
+
+        <a href="https://swinburne-kch-iot.web.app/" class="button">Here is our Web App for the Project</a>
+    </div>
+
+    <div class="footer">
+        <img src="cat.png" alt="Footer Cat" width="200" height="100">
+    </div>
+</body>
+</html>
